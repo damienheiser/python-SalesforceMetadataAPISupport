@@ -5,25 +5,39 @@ Using the Metadata API module:
 
 Using the module to login to your salesforce account:
 
+## Changelog
 createMetadata() and updateMetadata() are available.  Encapsulate a properly formed metadata xml to manipulate.
 
-##Sample code:
+By default this class will connect to a sandbox
+
+## Sample code:
+### Connect To Sandbox
 ```python
 import SalesforceMetadataModule as smm
+sandbox = True
 sfdc = smm.SalesforceMetadataModule(
-    yourSalesforceUserName, yourSalesforcePassword, yourSalesforceSecurityToken)
+    yourSalesforceUserName, yourSalesforcePassword, yourSalesforceSecurityToken, sandbox)
+print sfdc.getSessionId()
+```
+
+### Connect To Production
+```python
+import SalesforceMetadataModule as smm
+sandbox = False
+sfdc = smm.SalesforceMetadataModule(
+    yourSalesforceUserName, yourSalesforcePassword, yourSalesforceSecurityToken, sandbox)
 print sfdc.getSessionId()
 ```
 output: You should be able to see a session id generated
 
-##Calling the metadata api methods using the object (sfdc) created above:
+## Calling the metadata api methods using the object (sfdc) created above:
 
 using the 'sfdc' object you can call methods like:
 
 ```python
 sfdc.listMetadata(SalesforceObject, soap_api_version) # this will return a list of dictionaries
 ```
-###Example:
+### Example:
 ```python
 listContent = sfdc.listMetadata('CustomField', '34.0')
 ```
@@ -35,7 +49,7 @@ for each in listContent:
 ```        
 sample output will look like this:
 
-createdById => 00528000000OjSzAAK
+```createdById => 00528000000OjSzAAK
 
 createdByName => Sunil Singh
 
@@ -56,8 +70,9 @@ lastModifiedDate => 2015-06-23T08:41:46.000Z
 manageableState => unmanaged
 
 type => CustomField
+```
 
-##To retrieve any package from the salesforce account use the below method:
+## To retrieve any package from the salesforce account use the below method:
 
 sfdc.retrievePackage(members, name, api version, output zip file name)
 ```python
@@ -67,3 +82,8 @@ sfdc.retrievePackage("AllReports/CustomReportTypeJoin",
                      
 A zipped file will be saved in your working directory.
 
+## To create metadata into salesforce account use the below method:
+sfdc.createMetadata (metadataXML)
+
+## To update metadata into salesforce account use the below method:
+sfdc.updateMetadata (metadataXML)
