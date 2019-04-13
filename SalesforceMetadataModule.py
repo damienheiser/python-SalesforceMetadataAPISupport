@@ -10,7 +10,6 @@ import requests
 import subprocess
 import getpass
 import xmltodict
-from xml.dom.minidom import parseString
 
 
 __author__ = "Sunil Singh"
