@@ -5,6 +5,8 @@ Using the Metadata API module:
 
 Using the module to login to your salesforce account:
 
+createMetadata() and updateMetadata() are available.  Encapsulate a properly formed metadata xml to manipulate.
+
 ##Sample code:
 ```python
 import SalesforceMetadataModule as smm
