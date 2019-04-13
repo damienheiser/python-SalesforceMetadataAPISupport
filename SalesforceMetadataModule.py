@@ -27,9 +27,9 @@ __changelog__ = "New Methods: createMetadata () and updateMetadata (): Enable Sa
 # setting the xpath prefix for the xml tag
 _xPathXlmns = './/{http://soap.sforce.com/2006/04/metadata}'
 # current version of the api is v45.0
-_salesforceProdURL = 'https://login.salesforce.com/services/Soap/c/45.0'
-_salesforceTestURL = 'https://test.salesforce.com/services/Soap/c/45.0'
-_salesforceURL = _salesforceProdURL
+_salesforceProductionURL = 'https://login.salesforce.com/services/Soap/c/45.0'
+_salesforceSandboxURL = 'https://test.salesforce.com/services/Soap/c/45.0'
+_salesforceURL = _salesforceSandboxURL
 # enterprise xml name space
 _enterpriseXlmns = './/{urn:enterprise.soap.sforce.com}'
 
@@ -58,12 +58,12 @@ class SalesforceMetadataModule:
     userType = ""
     userUiSkin = ""
 
-    def __init__(self, username, password, s_token, test = True):
+    def __init__(self, username, password, s_token, sandbox = True):
 
-        if test == True:
-          _salesforceURL = _salesforceTestURL
+        if sandbox == True:
+          _salesforceURL = _salesforceSandboxURL
         else:
-          _salesforceURL = _salesforceProdURL
+          _salesforceURL = _salesforceProductionURL
         
         # headers = {'content-type': 'application/soap+xml',  'SOAPAction': ''}
         headers = {'content-type': 'text/xml', 'SOAPAction': 'Create'}
