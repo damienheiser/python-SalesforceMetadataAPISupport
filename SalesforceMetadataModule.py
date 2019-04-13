@@ -14,11 +14,12 @@ import xmltodict
 
 __author__ = "Sunil Singh"
 __copyright__ = "Copyright 2015, The Metadata API Project"
-__credits__ = ["Anil Kumar Ganivada"]
-__version__ = "0.1"
-__maintainer__ = "Sunil Singh"
-__email__ = "sun30nil@gmail.com"
+__credits__ = ["Anil Kumar Ganivada","Sunil Singh","Damien Heiser"]
+__version__ = "0.2"
+__maintainer__ = "Damien Heiser"
+__email__ = "damien@damienheiser.com"
 __status__ = "Development"
+__changelog = "New Methods: createMetadata () and updateMetadata ()"
 
 # some basic default settings for this class
 
@@ -240,3 +241,49 @@ class SalesforceMetadataModule:
             self.metadataServerUrl, data=body, headers=headers)
         listOfResult = xmltodict.parse(response.content)
         return listOfResult['soapenv:Envelope']['soapenv:Body'][u'listMetadataResponse'][u'result']
+
+    def createMetadata(self, metaData):
+        headers = {'content-type': 'text/xml', 'SOAPAction': 'Create'}
+        body = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:met="http://soap.sforce.com/2006/04/metadata">
+         <soapenv:Header>
+            <met:CallOptions>
+            </met:CallOptions>
+            <met:SessionHeader>
+               <met:sessionId>""" + self.sessionId + """</met:sessionId>
+            </met:SessionHeader>
+         </soapenv:Header>
+         <soapenv:Body>
+            <met:createMetadata>
+               <!--Encapulated Metadata-->
+               <met:metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="met:CustomObject">""" + metaData + """</met:metadata>
+            </met:createMetadata>
+         </soapenv:Body>
+      </soapenv:Envelope>"""
+        response = requests.post(
+            self.metadataServerUrl, data=body, headers=headers)
+        createResult = xmltodict.parse(response.content)
+        print '\nCreating Metadata!\n'
+        return createResult
+
+    def updateMetadata(self, metaData):
+        headers = {'content-type': 'text/xml', 'SOAPAction': 'Create'}
+        body = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:met="http://soap.sforce.com/2006/04/metadata">
+         <soapenv:Header>
+            <met:CallOptions>
+            </met:CallOptions>
+            <met:SessionHeader>
+               <met:sessionId>""" + self.sessionId + """</met:sessionId>
+            </met:SessionHeader>
+         </soapenv:Header>
+         <soapenv:Body>
+            <met:updateMetadata>
+               <!--Encapulated Metadata-->
+               <met:metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="met:CustomObject">""" + metaData + """</met:metadata>
+            </met:updateMetadata>
+         </soapenv:Body>
+      </soapenv:Envelope>"""
+        response = requests.post(
+            self.metadataServerUrl, data=body, headers=headers)
+        updateResult = xmltodict.parse(response.content)
+        print '\nUpdating Metadata!\n'
+        return updateResult
