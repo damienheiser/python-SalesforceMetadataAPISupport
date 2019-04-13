@@ -10,6 +10,8 @@ createMetadata() and updateMetadata() are available.  Encapsulate a properly for
 
 Sandbox functionality was added.  By default this class will connect to a sandbox if the sandbox variable is not passed.
 
+Updated to API Version 45 (Spring '19)
+
 ## Sample code:
 ### Connect To Sandbox
 ```python
@@ -48,7 +50,6 @@ for each in listContent:
         print k, "=>", v
 ```        
 sample output will look like this:
-
 ```createdById => 00528000000OjSzAAK
 
 createdByName => Sunil Singh
