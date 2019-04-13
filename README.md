@@ -8,7 +8,7 @@ Using the module to login to your salesforce account:
 ## Changelog
 createMetadata() and updateMetadata() are available.  Encapsulate a properly formed metadata xml to manipulate.
 
-By default this class will connect to a sandbox
+Sandbox functionality was added.  By default this class will connect to a sandbox if the sandbox variable is not passed.
 
 ## Sample code:
 ### Connect To Sandbox
