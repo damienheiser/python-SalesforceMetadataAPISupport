@@ -13,7 +13,7 @@ import xmltodict
 
 
 __author__ = "Sunil Singh"
-__copyright__ = "Copyright 2015, The Metadata API Project"
+__copyright__ = "Copyright 2015,2019 The Metadata API Project"
 __credits__ = ["Anil Kumar Ganivada","Sunil Singh","Damien Heiser"]
 __version__ = "0.2"
 __maintainer__ = "Damien Heiser"
