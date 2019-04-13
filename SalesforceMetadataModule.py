@@ -13,14 +13,13 @@ import xmltodict
 
 
 __author__ = "Sunil Singh"
-__authoremail__ = "sun30nil@gmail.com"
 __copyright__ = "Copyright 2015,2019 The Metadata API Project"
 __credits__ = ["Anil Kumar Ganivada","Sunil Singh","Damien Heiser"]
 __version__ = "0.2"
-__maintainer__ = "Damien Heiser"
-__maintaineremail__ = "damien@damienheiser.com"
+__maintainer__ = "Sunil Singh"
+__email__ = "sun30nil@gmail.com"
 __status__ = "Development"
-__changelog__ = "New Methods: createMetadata () and updateMetadata (): Enable Sandbox Support"
+__changelog__ = "Damien Heiser: damien@damienheiser.com: New Methods: createMetadata (),updateMetadata (), Enable Sandbox Support, Change API to 45"
 
 # some basic default settings for this class
 
