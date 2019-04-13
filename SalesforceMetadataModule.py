@@ -10,29 +10,32 @@ import requests
 import subprocess
 import getpass
 import xmltodict
+from xml.dom.minidom import parseString
 
 
 __author__ = "Sunil Singh"
+__authoremail__ = "sun30nil@gmail.com"
 __copyright__ = "Copyright 2015,2019 The Metadata API Project"
 __credits__ = ["Anil Kumar Ganivada","Sunil Singh","Damien Heiser"]
 __version__ = "0.2"
 __maintainer__ = "Damien Heiser"
-__email__ = "damien@damienheiser.com"
+__maintaineremail__ = "damien@damienheiser.com"
 __status__ = "Development"
-__changelog = "New Methods: createMetadata () and updateMetadata ()"
+__changelog__ = "New Methods: createMetadata () and updateMetadata (): Enable Sandbox Support"
 
 # some basic default settings for this class
 
 # setting the xpath prefix for the xml tag
 _xPathXlmns = './/{http://soap.sforce.com/2006/04/metadata}'
-# current version of the api is v34.0
-_salesforceURL = 'https://login.salesforce.com/services/Soap/c/34.0'
+# current version of the api is v45.0
+_salesforceProdURL = 'https://login.salesforce.com/services/Soap/c/45.0'
+_salesforceTestURL = 'https://test.salesforce.com/services/Soap/c/45.0'
+_salesforceURL = _salesforceProdURL
 # enterprise xml name space
 _enterpriseXlmns = './/{urn:enterprise.soap.sforce.com}'
 
 # sudo easy_install requests[security] # this installs necessary
 # certificates for requests
-
 
 class SalesforceMetadataModule:
     sessionId = ""
@@ -56,7 +59,13 @@ class SalesforceMetadataModule:
     userType = ""
     userUiSkin = ""
 
-    def __init__(self, username, password, s_token):
+    def __init__(self, username, password, s_token, test = True):
+
+        if test == True:
+          _salesforceURL = _salesforceTestURL
+        else:
+          _salesforceURL = _salesforceProdURL
+        
         # headers = {'content-type': 'application/soap+xml',  'SOAPAction': ''}
         headers = {'content-type': 'text/xml', 'SOAPAction': 'Create'}
         body = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:enterprise.soap.sforce.com">
